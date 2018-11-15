@@ -18,7 +18,6 @@ class Ship():
         self.ai_settings = ai_settigs
         self.image_file = 'game_img/ship.bmp'
 
-
         # 加载飞机图像并获取外接矩形
         self.img = pygame.image.load(self.image_file)
         # 修改图片大小
@@ -51,7 +50,7 @@ class Ship():
             self.center += self.ai_settings.ship_speed_factor
         if self.moving_left and self.rect.left > 0:
             self.center -= self.ai_settings.ship_speed_factor
-        if self.moving_top and self.rect.bottom > 60:
+        if self.moving_top and self.rect.bottom > self.rect.height:
             self.updown -= self.ai_settings.ship_speed_factor
         if self.moving_bottom and self.rect.bottom < self.screen_rect.height:
             self.updown += self.ai_settings.ship_speed_factor
@@ -66,3 +65,12 @@ class Ship():
         :return:
         """
         self.screen.blit(self.img, self.rect)
+
+    def center_ship(self):
+        """
+        让飞船在屏幕上居中
+        :return:
+        """
+        self.center = self.screen_rect.centerx
+        self.updown = self.screen_rect.bottom
+
